@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Box, Typography, styled } from '@mui/material';
 import Search from './Search';
 import CustomButtons from './CustomButtons';
 
-import img1 from '../../Asset/Home1.webp';
+import logo from '../../Asset/Header_Data/Home1.webp';
 
 const StyledHeader = styled(AppBar)`
     background: #808080;
@@ -30,7 +30,7 @@ const Header = () => {
         <StyledHeader>
             <Toolbar style={{minHeight: 55}}>
                 <Component>
-                    <img src={img1} alt="logo" style={{ width: 75 }} />
+                    <img src={logo} alt="logo" style={{ width: 75 }} />
 
                     <Box>
                         <SubHeading>Select Right</SubHeading>

@@ -1,19 +1,43 @@
 // NavBar.jsx
-import { Box } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 import { navData } from "../../constants/data";
 
+const Component = styled(Box)({
+    display: "flex",
+    margin: "70px 130px 0 130px",
+    justifyContent: "space-between",
+});
+
+const Container = styled(Box)({
+    padding: "12px 8px",
+    textAlign: "center",
+});
+
+const Text = styled(Typography)({
+    fontSize: "14px",
+    fontWeight: 500,
+    fontFamily: "inherit",
+});
+
 const NavBar = () => {
-    console.log(navData);
     return (
-        <Box>
-            {navData.map(data => (
-                <Box key={data.text}>
-                    <img src={data.img} alt={data.text} />
-                    <p>{data.text}</p>
-                </Box>
+        <Component>
+            {navData.map((data) => (
+                <Container key={data.text}>
+                    <img
+                        src={data.img}
+                        alt="nav"
+                        style={{
+                            height: 64,
+                            width: 64,
+                            borderRadius: "50%",
+                        }}
+                    />
+                    <Text>{data.text}</Text>
+                </Container>
             ))}
-        </Box>
+        </Component>
     );
-}
+};
 
 export default NavBar;
