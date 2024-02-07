@@ -1,9 +1,9 @@
 // data.js
-import delhi from '../Asset/Nav_Data/delhi.jpeg';
-import gujarat from '../Asset/Nav_Data/gujarat.jpeg';
-import karnataka from '../Asset/Nav_Data/karnataka.jpeg';
-import maharastra from '../Asset/Nav_Data/mumbai.jpeg';
-import tamil_nadu from '../Asset/Nav_Data/tamil_nadu.jpeg';
+import aurngabad from '../Asset/Nav_Data/aurngabad.jpg';
+import mumbai from '../Asset/Nav_Data/mumbai.jpg';
+import nagpur from '../Asset/Nav_Data/nagpur.jpg';
+import nashik from '../Asset/Nav_Data/nashik.jpg';
+import pune from '../Asset/Nav_Data/pune.jpg';
 
 import EDelhi from '../Asset/Banner_Data/IIT Delhi.jpg'
 import EGujarat from '../Asset/Banner_Data/ahmedabad university.png'
@@ -12,11 +12,11 @@ import EMaharastra from '../Asset/Banner_Data/IIT Mumbai.jpg'
 import ETamil_Nadu from '../Asset/Banner_Data/IIT Madras.jpeg'
 
 export const navData = [
-  { img: delhi, text: "Delhi" },
-  { img: gujarat, text: "Gujarat" },
-  { img: karnataka, text: "Karnataka" },
-  { img: maharastra, text: "Maharastra" },
-  { img: tamil_nadu, text: "Tamil Nadu" },
+  { img: aurngabad, text: "Aurngabad" },
+  { img: mumbai, text: "Mumbai" },
+  { img: nagpur, text: "Nagpur" },
+  { img: nashik, text: "Nashik" },
+  { img: pune, text: "Pune" },
 ];
 
 export const bannerData = [

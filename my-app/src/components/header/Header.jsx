@@ -6,14 +6,18 @@ import CustomButtons from './CustomButtons';
 
 import logo from '../../Asset/Header_Data/Home1.webp';
 
+import {Link} from 'react-router-dom';
+
 const StyledHeader = styled(AppBar)`
     background: #808080;
     height: 55px;
 `;
 
-const Component = styled(Box)`
+const Component = styled(Link)`
     margin-left: 10%;
     line-height: 0;
+    text-decoration: none;
+    color: inherit;
 `;
 
 const SubHeading = styled(Typography)`
@@ -29,7 +33,7 @@ const Header = () => {
     return (
         <StyledHeader>
             <Toolbar style={{minHeight: 55}}>
-                <Component>
+                <Component to = '/'>
                     <img src={logo} alt="logo" style={{ width: 75 }} />
 
                     <Box>

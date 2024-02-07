@@ -1,4 +1,9 @@
-import { Box, Button, Typography, styled } from "@mui/material";
+import { useState, useContext } from "react";
+
+import { Box, Button, styled } from "@mui/material";
+import LoginDialog from "../login/LoginDiaglog";
+import { DataContext } from "../../context/DataProvider";
+import Profile from "./Profile";
 
 const Wrapper = styled(Box)`
     display: flex;
@@ -25,10 +30,24 @@ const LoginButton = styled(Button)`
 `
 
 const CustomButtons = () => {
+
+    const [open, setOpen] = useState(false);
+
+    const{ account,setAccount } = useContext(DataContext);
+
+    const openDialog = () =>{
+        setOpen(true);
+    }
+
     return (
         <Wrapper>
-            <LoginButton variant='contained'>Login</LoginButton>
-            <Typography style={{ margin: 4, width: 135 }}>More</Typography>
+            {
+                account ? <Profile account = {account} setAccount={setAccount}/>:
+                    <LoginButton variant='contained' onClick={()=>openDialog()}>Login</LoginButton>
+            }
+            
+            
+            <LoginDialog open = {open} setOpen = {setOpen}/>
         </Wrapper>
     );
 }

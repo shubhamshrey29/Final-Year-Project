@@ -1,44 +1,35 @@
-//import ahmedabad from '../../my-app/src/Asset/Gujarat/ahemadad.png';
-//import gandhi_nagar from '../../my-app/src/Asset/Gujarat/gandhi_nagar.png';
-//import rajkot from '../../my-app/src/Asset/Gujarat/rajkot.png';
-//import surat from '../../my-app/src/Asset/Gujarat/surat.png';
-//import vadodra from '../../my-app/src/Asset/Gujarat/vadodra.png';
-
-const ahmedabad = require('../../my-app/src/Asset/Gujarat/ahemadad.png');
-const gandhi_nagar = require ('../../my-app/src/Asset/Gujarat/gandhi_nagar.png');
-const rajkot = require ('../../my-app/src/Asset/Gujarat/gandhi_nagar.png');
-const surat = require ('../../my-app/src/Asset/Gujarat/surat.png');
-const vadodra = require ('../../my-app/src/Asset/Gujarat/vadodra.png');
+//import aurngabad from '../Asset/Nav_Data/aurngabad.jpg';
+//import mumbai from '../Asset/Nav_Data/mumbai.jpg';
+//import nagpur from '../Asset/Nav_Data/nagpur.jpg';
+//import nashik from '../Asset/Nav_Data/nashik.jpg';
+//import pune from '../Asset/Nav_Data/pune.jpg';
 
 
 export const cities = [
     {
-        id: 'city1',
-        img: ahmedabad,  
-        title: 'Ahmedabad'  
+        id: 'city1', 
+        url: 'https://images.shiksha.com/mediadata/images/1652074140php1kO921.jpeg',
+        title: 'Jawaharlal Nehru Engineering College (JNEC), Aurngabad',
     },
-
     {
         id: 'city2',
-        img: gandhi_nagar,  
-        title: 'Gandhi Nagar'  
+        url: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/IITBMainBuildingCROP.jpg',
+        title: 'Indian Institute Of Technology Bombay, Mumbai',
     },
-
+    
     {
         id: 'city3',
-        img: rajkot,  
-        title: 'Rajkot'  
+        url: 'https://i.ytimg.com/vi/Ds5-EYTRloc/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AHUBoAC4AOKAgwIABABGGUgXChaMA8=&rs=AOn4CLCrJRusHB-yo06LrB1perxAgguGVA',
+        title: 'Visvesvaraya National Institute of Technology, Nagpur',
     },
-
     {
         id: 'city4',
-        img: surat,  
-        title: 'Surat'  
+        url: 'https://mvp.edu.in/mvpsite/wp-content/uploads/2023/07/3.jpg',
+        title: "MVP Samaj's College of Engineering, Nashik",
     },
-
     {
         id: 'city5',
-        img: vadodra,  
-        title: 'Vadodra'  
+        url: 'https://images.collegedunia.com/public/college_data/images/campusimage/1659617315IMG_20220210_122600-1024x766.jpg',
+        title: 'Defence Institute of Advanced Technology, Pune',
     },
 ];

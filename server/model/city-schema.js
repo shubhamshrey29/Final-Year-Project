@@ -2,11 +2,15 @@ import mongoose from "mongoose";
 
 
 const citySchema = new mongoose.Schema({
-    id:String,
-    img:String,
-    tiltle:String,
+    id:{
+        type: String,
+        required: true,
+        unique: true
+    },
+    url:String,
+    title:String,
 });
 
-const City = mongoose.model('database', citySchema)
+const City = mongoose.model('cities', citySchema);
 
 export default City;
