@@ -49,5 +49,4 @@ const DetailView = () => {
         </Component>
     )
 }
-
 export default DetailView;

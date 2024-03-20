@@ -1,9 +1,7 @@
-# Accuracy: 0.29163408913213446
-
 import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 
@@ -35,9 +33,9 @@ vectors = cv.fit_transform(universities['tags']).toarray()
 scaler = StandardScaler()
 vectors_standardized = scaler.fit_transform(vectors)
 
-# Train KNN model
-knn_model = KNeighborsClassifier(n_neighbors=5, metric='cosine')
-knn_model.fit(vectors_standardized, universities['institution'])
+# Train Random Forest model
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_model.fit(vectors_standardized, universities['institution'])
 
 def recommend(user_input):
     # Preprocess user input
@@ -54,24 +52,14 @@ def recommend(user_input):
     user_vector = cv.transform([user_tags_str]).toarray()
     user_vector_standardized = (user_vector - scaler.mean_) / np.sqrt(scaler.var_)
 
-    # Find nearest neighbors
-    distances, indices = knn_model.kneighbors(user_vector_standardized)
+    # Predict using Random Forest
+    predictions = rf_model.predict(user_vector_standardized)
 
     print("Top 3 recommendations for your preferences:")
-    recommended_universities = set()
-    count = 0
-    i = 0
-    while count < 3 and i < len(indices[0]):
-        index = indices[0][i]
-        institution = universities.iloc[index]['institution']
-        if institution not in recommended_universities:
-            print(institution)
-            recommended_universities.add(institution)
-            count += 1
-        i += 1
-    
+    print(predictions[0])
+
     # Calculate and print accuracy
-    predicted_labels = knn_model.predict(vectors_standardized)
+    predicted_labels = rf_model.predict(vectors_standardized)
     accuracy = accuracy_score(universities['institution'], predicted_labels)
     print(f"Accuracy: {accuracy}")
 

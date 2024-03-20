@@ -1,9 +1,11 @@
-# Accuracy: 0.29163408913213446
+# if priority is incorporated in this algorithm it will only show one output a time 
+# if not than it will show the recommendations with dont mach state and city
+# Accuracy: 0.8334636434714621
 
 import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 
@@ -35,9 +37,9 @@ vectors = cv.fit_transform(universities['tags']).toarray()
 scaler = StandardScaler()
 vectors_standardized = scaler.fit_transform(vectors)
 
-# Train KNN model
-knn_model = KNeighborsClassifier(n_neighbors=5, metric='cosine')
-knn_model.fit(vectors_standardized, universities['institution'])
+# Train Decision Tree model
+dt_model = DecisionTreeClassifier(random_state=42)
+dt_model.fit(vectors_standardized, universities['institution'])
 
 def recommend(user_input):
     # Preprocess user input
@@ -45,6 +47,14 @@ def recommend(user_input):
     user_city = user_input['city'].lower().strip()
     user_jee = float(user_input['jee'])
     user_mhtcet = float(user_input['mhtcet'])
+
+    # Filter universities based on state and city
+    filtered_universities = universities[(universities['state'].str.lower() == user_state) & 
+                                          (universities['city'].str.lower() == user_city)]
+
+    if filtered_universities.empty:
+        print("No universities found for the provided state and city.")
+        return
 
     # Create tag string with priority to state and city
     user_tags = [user_state, user_city, str(user_jee), str(user_mhtcet), '', '', '']
@@ -54,24 +64,24 @@ def recommend(user_input):
     user_vector = cv.transform([user_tags_str]).toarray()
     user_vector_standardized = (user_vector - scaler.mean_) / np.sqrt(scaler.var_)
 
-    # Find nearest neighbors
-    distances, indices = knn_model.kneighbors(user_vector_standardized)
+    # Predict probabilities using Decision Tree
+    probabilities = dt_model.predict_proba(user_vector_standardized)[0]
 
-    print("Top 3 recommendations for your preferences:")
-    recommended_universities = set()
+    # Get indices of top 3 probabilities
+    top_indices = np.argsort(probabilities)[::-1][:3]
+
+    print("Top 3 recommendations for your preferences in the provided state and city:")
     count = 0
-    i = 0
-    while count < 3 and i < len(indices[0]):
-        index = indices[0][i]
-        institution = universities.iloc[index]['institution']
-        if institution not in recommended_universities:
+    for index in top_indices:
+        institution = dt_model.classes_[index]
+        if institution in filtered_universities['institution'].values:
             print(institution)
-            recommended_universities.add(institution)
             count += 1
-        i += 1
+        if count == 3:
+            break
     
     # Calculate and print accuracy
-    predicted_labels = knn_model.predict(vectors_standardized)
+    predicted_labels = dt_model.predict(vectors_standardized)
     accuracy = accuracy_score(universities['institution'], predicted_labels)
     print(f"Accuracy: {accuracy}")
 

@@ -1,9 +1,11 @@
-# Accuracy: 0.29163408913213446
-
 import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 
@@ -35,9 +37,14 @@ vectors = cv.fit_transform(universities['tags']).toarray()
 scaler = StandardScaler()
 vectors_standardized = scaler.fit_transform(vectors)
 
-# Train KNN model
-knn_model = KNeighborsClassifier(n_neighbors=5, metric='cosine')
-knn_model.fit(vectors_standardized, universities['institution'])
+# Train and evaluate different classifiers
+classifiers = {
+    "KNN": KNeighborsClassifier(n_neighbors=5, metric='cosine'),
+    "Decision Tree": DecisionTreeClassifier(),
+    "Random Forest": RandomForestClassifier(),
+    "SVM": SVC(),
+    "Logistic Regression": LogisticRegression()
+}
 
 def recommend(user_input):
     # Preprocess user input
@@ -54,26 +61,30 @@ def recommend(user_input):
     user_vector = cv.transform([user_tags_str]).toarray()
     user_vector_standardized = (user_vector - scaler.mean_) / np.sqrt(scaler.var_)
 
-    # Find nearest neighbors
-    distances, indices = knn_model.kneighbors(user_vector_standardized)
-
     print("Top 3 recommendations for your preferences:")
-    recommended_universities = set()
-    count = 0
-    i = 0
-    while count < 3 and i < len(indices[0]):
-        index = indices[0][i]
-        institution = universities.iloc[index]['institution']
-        if institution not in recommended_universities:
-            print(institution)
-            recommended_universities.add(institution)
-            count += 1
-        i += 1
+    for name, clf in classifiers.items():
+        clf.fit(vectors_standardized, universities['institution'])
+        if name == "KNN":
+            distances, indices = clf.kneighbors(user_vector_standardized)
+            recommended_universities = set()
+            count = 0
+            i = 0
+            while count < 3 and i < len(indices[0]):
+                index = indices[0][i]
+                institution = universities.iloc[index]['institution']
+                if institution not in recommended_universities:
+                    print(f"{name}: {institution}")
+                    recommended_universities.add(institution)
+                    count += 1
+                i += 1
+        else:
+            predicted_labels = clf.predict(user_vector_standardized)
+            print(f"{name}: {predicted_labels[0]}")
     
-    # Calculate and print accuracy
-    predicted_labels = knn_model.predict(vectors_standardized)
-    accuracy = accuracy_score(universities['institution'], predicted_labels)
-    print(f"Accuracy: {accuracy}")
+        # Evaluate accuracy
+        predicted_labels = clf.predict(vectors_standardized)
+        accuracy = accuracy_score(universities['institution'], predicted_labels)
+        print(f"{name} Accuracy: {accuracy}")
 
 user_input = {'state': 'maharashtra', 'city': 'pune', 'jee': 90, 'mhtcet': 0}
 
