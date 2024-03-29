@@ -1,3 +1,6 @@
+# cannot show more than one result 
+# Accuracy: 0.8334636434714621
+
 import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
@@ -56,7 +59,10 @@ def recommend(user_input):
     predictions = rf_model.predict(user_vector_standardized)
 
     print("Top 3 recommendations for your preferences:")
-    print(predictions[0])
+    # Get top 3 predictions
+    top_predictions = predictions[:3]
+    for recommendation in top_predictions:
+        print(recommendation)
 
     # Calculate and print accuracy
     predicted_labels = rf_model.predict(vectors_standardized)
