@@ -26,6 +26,7 @@ const Home = () => {
 
     return(
         <>
+            
             <NavBar />
             <Component>
                 <Banner />

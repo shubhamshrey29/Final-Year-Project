@@ -93,9 +93,9 @@ const signupIntitialValues = {
     email: '',
     primaryresult: '',
     secondaryresult: '',
-    jeeresult: '',
+    jeepercentile: '',
     mhtcetresult: '',
-    placepreference: '',
+    statepreference: '',
     password: '',
 };
 
@@ -127,7 +127,7 @@ const LoginDialog = ({ open, setOpen }) => {
     };
 
     const validateFields = () => {
-        const requiredFields = ['firstname', 'lastname', 'username', 'email', 'primaryresult', 'secondaryresult', 'placepreference', 'password'];
+        const requiredFields = ['firstname', 'lastname', 'username', 'email', 'primaryresult', 'secondaryresult', 'jeepercentile','statepreference', 'password'];
 
         for (const field of requiredFields) {
             if (!signup[field]) {
@@ -190,9 +190,9 @@ const LoginDialog = ({ open, setOpen }) => {
                             <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='email' label = 'Enter Email *'/>
                             <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='primaryresult' label = 'Enter 10th Percentage *'/>
                             <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='secondaryresult' label = 'Enter 12th Percentage  *'/>
-                            <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='jeeresult' label = 'Enter JEE Percentile'/>
+                            <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='jeepercentile' label = 'Enter JEE Percentile*'/>
                             <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='mhtcetresult' label = 'Enter MHT-CET Percentile'/>
-                            <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='placepreference' label = 'Enter Your Location Preference *'/>
+                            <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='statepreference' label = 'Enter Your State Preference *'/>
                             <EnterField variant='standard' onChange={(e) => onInputChange(e)} name='password' label='Enter Password *' />
                             {error && <Error>{error}</Error>}
                             <LoginButton onClick={() => signupUser()}>Continue</LoginButton>

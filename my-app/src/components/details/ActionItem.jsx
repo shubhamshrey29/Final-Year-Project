@@ -1,14 +1,16 @@
-import { Box, Button, styled } from "@mui/material";
+import { Box, styled } from "@mui/material";
 
 const LeftContainer = styled (Box)`
     min-width: 40%;
     padding: 40px 0 0 80px;
 `;
 
+
 const Image = styled('img')({
     padding: '15px 20px',
-    border: '1px solid #f0f0f0',
-    width: '95%'
+    border: '2px solid #f0f0f0',
+    width: '450px',
+    height :'300px',
 });
 
 const ActionItem =({city}) =>{
@@ -16,7 +18,6 @@ const ActionItem =({city}) =>{
         <div>
             <LeftContainer>
                 <Image src={city.url} alt = 'city'/>
-                <Button variant="contained">Register</Button>
             </LeftContainer>
         </div>
     )

@@ -9,6 +9,7 @@ const citySchema = new mongoose.Schema({
     },
     url:String,
     title:String,
+    detail:String,
 });
 
 const City = mongoose.model('cities', citySchema);

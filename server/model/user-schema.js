@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        min:5,
+        min:3,
         max:20,
         unique: true,
         index:true,
@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
         trim: true,
         unique: false,
     },
-    jeeresult:{
+    jeepercentile:{
         type: Number,
         required: true,
         trim: true,
@@ -54,7 +54,7 @@ const userSchema = new mongoose.Schema({
         trim: true,
         unique: false,
     },
-    placepreference:{
+    statepreference:{
         type: String,
         required: true,
         unique: false,

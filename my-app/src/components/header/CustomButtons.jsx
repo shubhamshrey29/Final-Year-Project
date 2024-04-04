@@ -5,6 +5,7 @@ import LoginDialog from "../login/LoginDiaglog";
 import { DataContext } from "../../context/DataProvider";
 import Profile from "./Profile";
 
+
 const Wrapper = styled(Box)`
     display: flex;
     margin: 0 3% 0 auto;
@@ -18,12 +19,13 @@ const Wrapper = styled(Box)`
 const LoginButton = styled(Button)`
     color: #808080;
     background: #ffff;
-    text-transform: none; /* Corrected typo here */
+    text-transform: none;
     padding: 5px 40px;
     border-radius: 2px;
     box-shadow: none;
     font-weight: 600;
     height: 32px;
+    width: 32px;
     &:hover {
         background-color: #fff; /* Change the background color on hover to white */
     }
@@ -43,11 +45,12 @@ const CustomButtons = () => {
         <Wrapper>
             {
                 account ? <Profile account = {account} setAccount={setAccount}/>:
-                    <LoginButton variant='contained' onClick={()=>openDialog()}>Login</LoginButton>
+                    <LoginButton variant='contained' onClick={()=>openDialog()}>
+                        Login
+                    </LoginButton>
             }
-            
-            
             <LoginDialog open = {open} setOpen = {setOpen}/>
+            
         </Wrapper>
     );
 }
