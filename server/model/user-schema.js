@@ -30,12 +30,6 @@ const userSchema = new mongoose.Schema({
         unique: true,
         lowercase: true
     },
-    primaryresult:{
-        type: Number,
-        required: true,
-        trim: true,
-        unique: false,
-    },
     secondaryresult:{
         type: Number,
         required: true,

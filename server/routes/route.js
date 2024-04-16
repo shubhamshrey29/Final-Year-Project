@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { userSignup, userLogin } from '../controller/user-controller.js';
-import { getCities, getCityById } from '../controller/product-controller.js';
+import { getCities, getCityById } from '../controller/city-controller.js';
 
 
 const router = express.Router();

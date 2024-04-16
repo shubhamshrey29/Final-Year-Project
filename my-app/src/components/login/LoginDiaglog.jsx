@@ -91,7 +91,6 @@ const signupIntitialValues = {
     lastname: '',
     username: '',
     email: '',
-    primaryresult: '',
     secondaryresult: '',
     jeepercentile: '',
     mhtcetresult: '',
@@ -127,11 +126,11 @@ const LoginDialog = ({ open, setOpen }) => {
     };
 
     const validateFields = () => {
-        const requiredFields = ['firstname', 'lastname', 'username', 'email', 'primaryresult', 'secondaryresult', 'jeepercentile','statepreference', 'password'];
+        const requiredFields = ['firstname', 'lastname', 'username', 'email', 'secondaryresult', 'jeepercentile', 'statepreference', 'password'];
 
         for (const field of requiredFields) {
             if (!signup[field]) {
-                setError(`Please fill in the ${field === 'primaryresult' ? '10th Percentage' : field === 'secondaryresult' ? '12th Percentage' : field} field.`);
+                setError(`Please fill in the ${field === 'secondaryresult' ? '12th Percentage' : field} field.`);
                 return false;
             }
         }
@@ -188,7 +187,6 @@ const LoginDialog = ({ open, setOpen }) => {
                             <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='lastname' label = 'Enter Last Name *'/>
                             <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='username' label = 'Enter Username *'/>
                             <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='email' label = 'Enter Email *'/>
-                            <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='primaryresult' label = 'Enter 10th Percentage *'/>
                             <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='secondaryresult' label = 'Enter 12th Percentage  *'/>
                             <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='jeepercentile' label = 'Enter JEE Percentile*'/>
                             <EnterField variant='standard' onChange={(e) => onInputChange(e)}  name ='mhtcetresult' label = 'Enter MHT-CET Percentile'/>

@@ -73,7 +73,7 @@ const Slide = ({ cities, title }) => {
             {cities && cities.map(city => (
               <Link to = {`city/${city.id}`} style={{textDecoration : 'none'}}>
                 <Box textAlign="center" style={{ padding: '25px 15px' }} key={city.id}>
-                  <Image src={city.url} alt="city" />
+                  <Image src={city.url} alt="city" style={{objectFit: 'cover'}}/>
                   <Text style={{ fontWeight: 600, color: '#212121' }}>{city.title} </Text>
                 </Box>
               </Link>
