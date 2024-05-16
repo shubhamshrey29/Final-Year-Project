@@ -9,6 +9,8 @@ const citySchema = new mongoose.Schema({
     },
     url:String,
     title:String,
+    state:String,
+    city:String,
     detail:String,
 });
 

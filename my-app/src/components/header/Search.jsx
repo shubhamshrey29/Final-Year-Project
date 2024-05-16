@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { InputBase, Box, styled, List, ListItem } from "@mui/material";
+import { InputBase, Box, styled, List, ListItem, Typography } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
 import { useSelector, useDispatch } from "react-redux";
@@ -34,23 +34,28 @@ const ListWrapper = styled(List)`
     margin-top: 35px;
 `;
 
+const NoSearchResult = styled(Typography)`
+    padding: 10px;
+`;
 
 const Search = () => {
     const [text, setText] = useState('');
 
-    const {cities} = useSelector(state => state.getCities);
+    const { cities } = useSelector(state => state.getCities);
     const dispatch = useDispatch();
-    useEffect(() =>{
+    useEffect(() => {
         dispatch(getCities())
-    }, [dispatch])
+    }, [dispatch]);
 
     const getText = (text) => {
         setText(text);
     };
 
+    const filteredCities = cities.filter(city => city.title.toLowerCase().includes(text.toLowerCase()));
+
     return (
         <SearchContainer>
-            <InputSearchbase 
+            <InputSearchbase
                 placeholder="Search for Universities and Colleges"
                 onChange={(e) => getText(e.target.value)}
                 value={text}
@@ -58,23 +63,24 @@ const Search = () => {
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
-            {
-                text && 
-                    <ListWrapper>
-                        {
-                            cities.filter(city => city.title.toLowerCase().includes(text.toLowerCase())).map(city => (
-                                <ListItem>
-                                    <Link
-                                        to = {`/city/${city.id}`}
-                                        onClick = {()=> setText('')}
-                                        style={{textDecoration: 'none', color:'inherit'}}
-                                    >
-                                        {city.title}
-                                    </Link>
-                                </ListItem>
-                            ))
-                        }
-                    </ListWrapper>
+            {text &&
+                <ListWrapper>
+                    {filteredCities.length > 0 ? (
+                        filteredCities.map(city => (
+                            <ListItem key={city.id}>
+                                <Link
+                                    to={`/city/${city.id}`}
+                                    onClick={() => setText('')}
+                                    style={{ textDecoration: 'none', color: 'inherit' }}
+                                >
+                                    {city.title}
+                                </Link>
+                            </ListItem>
+                        ))
+                    ) : (
+                        <NoSearchResult>No results found</NoSearchResult>
+                    )}
+                </ListWrapper>
             }
         </SearchContainer>
     );

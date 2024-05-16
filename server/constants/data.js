@@ -9,7 +9,9 @@ export const cities = [
     {
         id: 'city1', 
         url: 'https://images.shiksha.com/mediadata/images/1652074140php1kO921.jpeg',
-        title: 'Jawaharlal Nehru Engineering College (JNEC), Aurngabad',
+        title: 'Jawaharlal Nehru Engineering College (JNEC)',
+        state: 'Maharashtra',
+        city: 'Aurangabad',
         detail:'Jawaharlal Nehru Engineering College is a premier institute of engineering that has carved a niche for itself in the field of technical education in a very short span of time. The college has made its presence felt in the world of technical education.',
     },
     {

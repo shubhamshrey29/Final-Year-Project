@@ -55,6 +55,13 @@ const userSchema = new mongoose.Schema({
         trim: true,
         lowercase: true
     },
+    citypreference:{
+        type: String,
+        required: true,
+        unique: false,
+        trim: true,
+        lowercase: true
+    },
     password:{
         type: String,
         required: true,
