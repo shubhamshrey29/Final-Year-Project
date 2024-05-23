@@ -1,0 +1,30 @@
+.navbar {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.navbar-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+}
+
+.icon-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.icon-text {
+    font-size: 20px;
+    margin-top: 8px;
+    font-family: 'Times New Roman', Times, serif;
+    text-decoration: none;
+    color: black;
+}

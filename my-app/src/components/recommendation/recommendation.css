@@ -1,0 +1,41 @@
+.Recommendation {
+    margin-left: 7rem;
+    margin-top: 5rem;
+}
+
+.Recommendation-title {
+    margin-bottom: 3rem;
+    font-size: 35px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 800;
+}
+
+.Recommendation-recommendations {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.Recommendation-recommendations div {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.Recommendation-recommendations img {
+    width: 20rem;
+    height: 10rem;
+    margin-bottom: 20px;
+    border: 10px solid #ffffff; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
+                0 -4px 8px rgba(0, 0, 0, 0.1), 
+                4px 0 8px rgba(0, 0, 0, 0.1), 
+                -4px 0 8px rgba(0, 0, 0, 0.1);
+    border-radius:5px;
+}
+
+.Recommendation-recommendations p {
+    font-size: 25px;
+    margin-left: 4rem;
+    font-family: 'Times New Roman', Times, serif;
+}

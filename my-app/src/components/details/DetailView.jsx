@@ -44,10 +44,33 @@ const DetailView = () => {
                         <ActionItem city ={city}/>
                     </Grid>
                     <RightContainer item lg ={8} md={8} sm={8} xs={12}>
-                        <Typography style={{marginLeft:'140px', fontWeight:'bold', fontFamily:'Times New Roman',fontSize:'25px'}}>
+                        <Typography style={{marginLeft:'140px',marginBottom:'25px', fontWeight:'bold', fontFamily:'Times New Roman',fontSize:'25px'}}>
                             {city.title}
                         </Typography>
-                        <Typography style={{marginLeft:'140px', fontFamily:'Times New Roman',fontSize:'20px'}}>
+                        <Box display={'flex'}>
+                            <Typography style={{marginLeft:'140px', fontFamily:'Times New Roman',fontSize:'20px'}}>
+                                {city.state}
+                            </Typography>
+                            <Typography style={{marginLeft:'20px', marginBottom:'25px', fontFamily:'Times New Roman',fontSize:'20px'}}>
+                                {city.city}
+                            </Typography>
+                        </Box>
+                        <Typography style={{marginLeft:'140px', marginBottom:'25px',fontFamily:'Times New Roman',fontSize:'20px'}}>
+                            {city.AdmissionProcess}
+                        </Typography>
+                        <Typography style={{marginLeft:'140px', marginBottom:'25px',fontFamily:'Times New Roman',fontSize:'20px'}}>
+                            {city.Coursesoffer}
+                        </Typography>
+                        <Typography style={{marginLeft:'140px', marginBottom:'25px',fontFamily:'Times New Roman',fontSize:'20px'}}>
+                            {city.FeeStructure}
+                        </Typography>
+                        <Typography style={{marginLeft:'140px', marginBottom:'25px',fontFamily:'Times New Roman',fontSize:'20px'}}>
+                            {city.Placement}
+                        </Typography>
+                        <Typography style={{marginLeft:'140px', marginBottom:'25px',fontFamily:'Times New Roman',fontSize:'20px'}}>
+                            {city.Cutoff}
+                        </Typography>
+                        <Typography style={{marginLeft:'140px', marginBottom:'25px',fontFamily:'Times New Roman',fontSize:'20px'}}>
                             {city.detail}
                         </Typography>
                     </RightContainer>

@@ -1,5 +1,5 @@
 // data.js
-import aurngabad from '../Asset/Nav_Data/aurngabad.jpg';
+import aurangabad from '../Asset/Nav_Data/aurangabad.jpg';
 import mumbai from '../Asset/Nav_Data/mumbai.jpg';
 import nagpur from '../Asset/Nav_Data/nagpur.jpg';
 import nashik from '../Asset/Nav_Data/nashik.jpg';
@@ -12,7 +12,7 @@ import EMaharastra from '../Asset/Banner_Data/IIT Mumbai.jpg'
 import ETamil_Nadu from '../Asset/Banner_Data/IIT Madras.jpeg'
 
 export const navData = [
-  { img: aurngabad, text: "Aurngabad" },
+  { img: aurangabad, text: "Aurangabad" },
   { img: mumbai, text: "Mumbai" },
   { img: nagpur, text: "Nagpur" },
   { img: nashik, text: "Nashik" },

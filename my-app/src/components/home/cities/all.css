@@ -1,0 +1,41 @@
+.list {
+    width: 100%;
+}
+
+.list h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    font-weight: 500;
+    margin-left: 2rem;
+    margin-top: 5rem;
+}
+
+.list_segment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px 0; 
+}
+
+.list_segment a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none; 
+    color: #000; 
+}
+
+.list_segment p {
+    font-family: 'Times New Roman', Times, serif;
+    margin-left: 2rem;
+    font-size: 30px;
+}
+
+.list_segment img {
+    width: 400px;
+    height: 300px;
+    margin: 0 20px 40px 40px;
+    border: 10px solid #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    border-radius: 3px; 
+}

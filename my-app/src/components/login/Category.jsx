@@ -40,7 +40,7 @@ export const StateCategory = ({ onSelect }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => handleStateSelect('Maharashtra')} sx={{ marginLeft: '22px', fontSize: '16px' }}>Maharashtra</MenuItem>
+        <MenuItem onClick={() => handleStateSelect('Maharashtra')} sx={{ marginLeft: '22px',marginRight: '22px', fontSize: '16px' }}>Maharashtra</MenuItem>
       </Menu>
     </div>
   );
@@ -81,14 +81,17 @@ export const CityCategory = ({ onSelect }) => {
           cursor: 'pointer'
         }}>Enter Your City Preference *</Button>
       )}
-      {selectedCity && <Typography sx={{ marginLeft: '30px', fontSize: '18px' }}>{selectedCity}</Typography>} {/* Display selected city if it's selected */}
+      {selectedCity && <Typography sx={{ marginLeft: '30px', fontSize: '18px' }}>{selectedCity}</Typography>}
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => handleCitySelect('Nasik')} sx={{ marginLeft: '22px', fontSize: '16px' }}>Nasik</MenuItem>
-        <MenuItem onClick={() => handleCitySelect('Pune')} sx={{ marginLeft: '22px', fontSize: '16px' }}>Pune</MenuItem>
+        <MenuItem onClick={() => handleCitySelect('Aurangabad')} sx={{ marginLeft: '22px',marginRight: '22px', fontSize: '16px' }}>Aurangabad</MenuItem>
+        <MenuItem onClick={() => handleCitySelect('Mumbai')} sx={{ marginLeft: '22px',marginRight: '22px', fontSize: '16px' }}>Mumbai</MenuItem>
+        <MenuItem onClick={() => handleCitySelect('Nagpur')} sx={{ marginLeft: '22px',marginRight: '22px', fontSize: '16px' }}>Nagpur</MenuItem>
+        <MenuItem onClick={() => handleCitySelect('Nasik')} sx={{ marginLeft: '22px',marginRight: '22px', fontSize: '16px' }}>Nasik</MenuItem>
+        <MenuItem onClick={() => handleCitySelect('Pune')} sx={{ marginLeft: '22px',marginRight: '22px', fontSize: '16px' }}>Pune</MenuItem>
       </Menu>
     </div>
   );

@@ -41,17 +41,6 @@ const LoginButton = styled(Button)`
     }
 `;
 
-const RequestOTP = styled(Button)`
-    text-transform: none;
-    background: #ffff;
-    color: #757575;
-    height: 48px;
-    border-radius: 2px;
-    width: 70%;
-    text-align: center;
-    margin: 0 auto;
-    box-shadow: 0 2px 4px 0 rgb(0 0 0/ 20%);
-`;
 
 const Text = styled(Typography)`
     font-size: 16px;
@@ -155,7 +144,6 @@ const LoginDialog = ({ open, setOpen }) => {
         // Validate data types
         const { firstname, lastname, secondaryresult, jeepercentile, mhtcetresult } = signup;
         const nameRegex = /^[a-zA-Z]+$/;
-        const numberRegex = /^\d+$/;
 
         if (!nameRegex.test(firstname)) {
             setError('First name should contain only letters.');
@@ -167,32 +155,32 @@ const LoginDialog = ({ open, setOpen }) => {
             return false;
         }
 
-        if (!numberRegex.test(secondaryresult)) {
+        if (isNaN(parseFloat(secondaryresult))) {
             setError('12th percentage should contain only numbers.');
             return false;
         }
 
-        if (parseInt(secondaryresult) > 100) {
+        if (parseFloat(secondaryresult) > 100) {
             setError('12th percentage should not exceed 100.');
             return false;
         }
 
-        if (!numberRegex.test(jeepercentile)) {
+        if (isNaN(parseFloat(jeepercentile))) {
             setError('JEE percentile should contain only numbers.');
             return false;
         }
 
-        if (parseInt(jeepercentile) > 100) {
+        if (parseFloat(jeepercentile) > 100) {
             setError('JEE percentile should not exceed 100.');
             return false;
         }
 
-        if (mhtcetresult && !numberRegex.test(mhtcetresult)) {
+        if (mhtcetresult && isNaN(parseFloat(mhtcetresult))) {
             setError('MHT-CET percentile should contain only numbers.');
             return false;
         }
 
-        if (mhtcetresult && parseInt(mhtcetresult) > 100) {
+        if (mhtcetresult && parseFloat(mhtcetresult) > 100) {
             setError('MHT-CET percentile should not exceed 100.');
             return false;
         }
@@ -258,50 +246,48 @@ const LoginDialog = ({ open, setOpen }) => {
                             </Typography>
                         </Box>
                         <EnterField variant='standard' onChange={(e) => onValueChange(e)} name='username' label='Enter Username' />
-
                         {error && <Error>Please Enter Valid Username or Password</Error>}
-                        <EnterField variant='standard' onChange={(e) => onValueChange(e)} name='password' label='Enter Password' />
-                        <Text>By continuing, you agree to our Terms of Use and Privacy Policy.</Text>
-                        <LoginButton onClick={() => loginUser()}>Login</LoginButton>
-                        <Typography style={{ textAlign: 'center' }}>OR</Typography>
-                        <RequestOTP>Request OTP</RequestOTP>
-                        <CreateAccount onClick={() => toggleSignup()}>New? Create an account</CreateAccount>
-                    </Wrapper>
-                ) : (
-                    <Wrapper>
-                        <Box>
-                            <Typography style={{
-                                fontFamily: 'Times New Roman',
-                                fontSize: '40px',
-                                fontWeight: '800',
-                                color: '#616161',
-                                textAlign: 'center'
-                            }}>
-                                Sign UP
-                            </Typography>
-                        </Box>
-                        <EnterField variant='standard' onChange={(e) => onInputChange('firstname', e.target.value)} name='firstname' label='Enter First Name *' />
-                        <EnterField variant='standard' onChange={(e) => onInputChange('lastname', e.target.value)} name='lastname' label='Enter Last Name *' />
-                        <EnterField variant='standard' onChange={(e) => onInputChange('username', e.target.value)} name='username' label='Enter Username *' />
-                        <EnterField variant='standard' onChange={(e) => onInputChange('email', e.target.value)} name='email' label='Enter Email *' />
-                        <EnterField variant='standard' onChange={(e) => onInputChange('secondaryresult', e.target.value)} name='secondaryresult' label='Enter 12th Percentage  *' />
-                        <EnterField variant='standard' onChange={(e) => onInputChange('jeepercentile', e.target.value)} name='jeepercentile' label='Enter JEE Percentile*' />
-                        <EnterField variant='standard' onChange={(e) => onInputChange('mhtcetresult', e.target.value)} name='mhtcetresult' label='Enter MHT-CET Percentile' />
-                        <StateCategory onSelect={handleStateSelect} setOpen={setStateCategoryOpen} />
-                        <CityCategory onSelect={handleCitySelect} setOpen={setCityCategoryOpen} />
-                        <EnterField variant='standard' onChange={(e) => onInputChange('password', e.target.value)} name='password' label='Enter Password *' />
-                        {error && <Error>{error}</Error>}
-                        <LoginButton onClick={() => signupUser()}>Continue</LoginButton>
-                        <Box>
-                            <Typography style={{ color: '#fff' }}>
-                                .
-                            </Typography>
-                        </Box>
-                    </Wrapper>
-                )}
-            </Box>
-        </Component>
-    </Dialog>
+                    <EnterField variant='standard' onChange={(e) => onValueChange(e)} name='password' label='Enter Password' />
+                    <Text>By continuing, you agree to our Terms of Use and Privacy Policy.</Text>
+                    <LoginButton onClick={() => loginUser()}>Login</LoginButton>
+                    <Typography style={{ textAlign: 'center' }}>OR</Typography>
+                    <CreateAccount onClick={() => toggleSignup()}>New? Create an account</CreateAccount>
+                </Wrapper>
+            ) : (
+                <Wrapper>
+                    <Box>
+                        <Typography style={{
+                            fontFamily: 'Times New Roman',
+                            fontSize: '40px',
+                            fontWeight: '800',
+                            color: '#616161',
+                            textAlign: 'center'
+                        }}>
+                            Sign UP
+                        </Typography>
+                    </Box>
+                    <EnterField variant='standard' onChange={(e) => onInputChange('firstname', e.target.value)} name='firstname' label='Enter First Name *' />
+                    <EnterField variant='standard' onChange={(e) => onInputChange('lastname', e.target.value)} name='lastname' label='Enter Last Name *' />
+                    <EnterField variant='standard' onChange={(e) => onInputChange('username', e.target.value)} name='username' label='Enter Username *' />
+                    <EnterField variant='standard' onChange={(e) => onInputChange('email', e.target.value)} name='email' label='Enter Email *' />
+                    <EnterField variant='standard' onChange={(e) => onInputChange('secondaryresult', e.target.value)} name='secondaryresult' label='Enter 12th Percentage  *' />
+                    <EnterField variant='standard' onChange={(e) => onInputChange('jeepercentile', e.target.value)} name='jeepercentile' label='Enter JEE Percentile*' />
+                    <EnterField variant='standard' onChange={(e) => onInputChange('mhtcetresult', e.target.value)} name='mhtcetresult' label='Enter MHT-CET Percentile' />
+                    <StateCategory onSelect={handleStateSelect} setOpen={setStateCategoryOpen} />
+                    <CityCategory onSelect={handleCitySelect} setOpen={setCityCategoryOpen} />
+                    <EnterField variant='standard' onChange={(e) => onInputChange('password', e.target.value)} name='password' label='Enter Password *' />
+                    {error && <Error>{error}</Error>}
+                    <LoginButton onClick={() => signupUser()}>Continue</LoginButton>
+                    <Box>
+                        <Typography style={{ color: '#fff' }}>
+                            .
+                        </Typography>
+                    </Box>
+                </Wrapper>
+            )}
+        </Box>
+    </Component>
+</Dialog>
 );
 };
 

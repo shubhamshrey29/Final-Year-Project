@@ -1,7 +1,7 @@
-// Recommendations.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import './recommendation.css';
 
 const Recommendations = () => {
     const { userId } = useParams();
@@ -9,6 +9,7 @@ const Recommendations = () => {
     const [error, setError] = useState('');
 
 
+    
     useEffect(() => {
         const fetchRecommendations = async () => {
             try {
@@ -26,20 +27,24 @@ const Recommendations = () => {
         fetchRecommendations();
     }, [userId]);
 
-
     return (
         <div>
             {error ? (
                 <p>{error}</p>
             ) : (
-                <>
-                    <h2>Recommendations for {userId}</h2>
-                    <ul>
+                <div className='Recommendation'>
+                    <div className='Recommendation-title'>
+                        <h2>Recommendations for {userId}</h2>
+                    </div>
+                    <div className='Recommendation-recommendations'>
                         {recommendations.map((recommendation, index) => (
-                            <li key={index}>{recommendation}</li>
+                            <div key={index}>
+                                    <img src={recommendation.url} alt={recommendation.institution} />
+                                    <p>{recommendation.institution}</p>
+                            </div>
                         ))}
-                    </ul>
-                </>
+                    </div>
+                </div>
             )}
         </div>
     );

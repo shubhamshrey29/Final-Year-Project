@@ -14,6 +14,9 @@ load_dotenv()  # take environment variables from .env.
 def get_user_data(user_id, collection):
     return collection.find_one({"username": user_id})
 
+def get_institution_details(institution_name, cities_collection):
+    return cities_collection.find_one({"title": institution_name})
+
 def run_recommendation(user_id):
 
     # Read username and password from environment variables
@@ -23,6 +26,7 @@ def run_recommendation(user_id):
     client = pymongo.MongoClient(f"mongodb+srv://{db_username}:{db_password}@cluster0.fziglo8.mongodb.net/?retryWrites=true&w=majority")
     db = client["home"]
     collection = db["users"]
+    cities_collection = db["cities"]
 
     # Retrieve user data from MongoDB
     user_data = get_user_data(user_id, collection)
@@ -50,42 +54,49 @@ def run_recommendation(user_id):
             'mhtcet': mhtcet_result,
         }
 
-        nb_model = MultinomialNB()
+        # Adjust weights for learning rate
+        state_weight = 5
+        city_weight = 3
+
+        nb_model = MultinomialNB(alpha=0.1)  # Adjusting the learning rate (alpha)
         nb_model.fit(vectors_standardized, y)
 
         # Define recommendation function
-        def recommend(user_input, cv, scaler, nb_model, universities, recommended_so_far=[]):
+        def recommend(user_input, cv, scaler, nb_model, universities, cities_collection, recommended_so_far=[]):
             user_state = user_input['state'].lower().strip()
             user_city = user_input['city'].lower().strip()
 
             user_jee = float(user_input['jee'])
             user_mhtcet = float(user_input['mhtcet'])
 
-            state_weight = 5
-            city_weight = 3
-
+            # Create user tags with adjusted weights
             user_tags = ' '.join([state_weight * user_state, city_weight * user_city, str(user_jee), str(user_mhtcet)]).lower()
 
             user_vector = cv.transform([user_tags])
             user_vector_standardized = scaler.transform(user_vector.toarray())
 
             predicted_probabilities = nb_model.predict_proba(user_vector_standardized)[0]
-            top_indices = np.argsort(predicted_probabilities)[::-1] # Sort in descending order
+            top_indices = np.argsort(predicted_probabilities)[::-1]  # Sort in descending order
             recommended_institutions = []
             for index in top_indices:
                 original_institution = universities.iloc[index]['institution']
                 institution = original_institution.lower().strip()
-                state = universities.iloc[index]['state'].lower().strip() 
+                state = universities.iloc[index]['state'].lower().strip()
                 if institution not in recommended_so_far and state == 'maharashtra':
-                    recommended_institutions.append(original_institution)
-                    recommended_so_far.append(institution)
+                    institution_details = get_institution_details(original_institution, cities_collection)
+                    if institution_details:
+                        recommended_institutions.append({
+                            "institution": original_institution,
+                            "url": institution_details.get('url')
+                        })
+                        recommended_so_far.append(institution)
 
                 if len(recommended_institutions) == 3:
                     break
 
             return recommended_institutions
 
-        recommendations = recommend(user_input, cv, scaler, nb_model, universities)
+        recommendations = recommend(user_input, cv, scaler, nb_model, universities, cities_collection)
 
         return recommendations
     else:

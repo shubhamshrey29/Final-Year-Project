@@ -3,10 +3,11 @@ import 'react-multi-carousel/lib/styles.css';
 import { Box, Button, Typography,Divider, styled } from "@mui/material";
 import {Link} from 'react-router-dom';
 
+
 const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 4
+      items: 3
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -52,7 +53,13 @@ const Slide = ({ cities, title }) => {
       <Component>
         <Deal>
           <Typography>{title}</Typography>
-          <ViewAllButton variant="contained">View All</ViewAllButton>
+          
+            <ViewAllButton variant="contained">
+                <Link to = '/cities' style={{textDecoration:'none', color:'#ffffff'}}>
+                  View All
+                </Link>
+              </ViewAllButton>
+          
         </Deal>
         <Divider />
         {cities && (
